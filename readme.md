@@ -69,6 +69,8 @@ Create Directory and a sample content `sudo mkdir /var/www/website/ && echo "<?p
 
 show full path in terminal `set -U fish_prompt_pwd_dir_length 0`
 
+set fish as default shell `chsh -s $(which fish)`
+
 ### NVM for fish shell
 
 Install Fisher Plugin Manager `curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fish`
