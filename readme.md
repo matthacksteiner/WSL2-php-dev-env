@@ -63,4 +63,22 @@ Create Directory and a sample content `sudo mkdir /var/www/website/ && echo "<?p
 
 `sudo apt install composer`
 
-## Install NodeJS
+## Install fish shell
+
+`sudo apt-add-repository ppa:fish-shell/release-3 && sudo apt update && sudo apt install fish -y`
+
+show full path in terminal `set -U fish_prompt_pwd_dir_length 0`
+
+### NVM for fish shell
+
+Install Fisher Plugin Manager `curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fish`
+
+`fisher install jorgebucaran/nvm.fish`
+`nvm install --lts`
+
+see options at: https://github.com/jorgebucaran/nvm.fish
+
+## Git config globally
+
+`git config --global user.name "FIRST_NAME LAST_NAME"`
+`git config --global user.email "MY_NAME@example.com"`
