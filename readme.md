@@ -78,6 +78,8 @@ Install Fisher Plugin Manager `curl https://git.io/fisher --create-dirs -sLo ~/.
 `fisher install jorgebucaran/nvm.fish`
 `nvm install --lts`
 
+load LTS in fish startup `echo "nvm use lts" >> ~/.config/fish/config.fish`
+
 see options at: https://github.com/jorgebucaran/nvm.fish
 
 ## Git config globally
