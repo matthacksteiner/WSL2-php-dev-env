@@ -92,10 +92,14 @@ Install Composer
 
 ### NVM for fish shell
 
-Install Fisher Plugin Manager `curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fish`
+Install Fisher Plugin Manager 
+`curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fish`
 
+Install NVM
 `fisher install jorgebucaran/nvm.fish`
-`nvm install --lts`
+
+Install latest LTS Version 
+`nvm install lts`
 
 load LTS in fish startup `echo "nvm use lts" >> ~/.config/fish/config.fish`
 
