@@ -18,7 +18,8 @@ Install Apache 2 `sudo apt-get install apt-transport-https ca-certificates apach
 
 `sudo a2enmod headers && sudo a2enmod rewrite && sudo a2enmod ssl && sudo a2enmod remoteip`
 
-Add user to www-data group `sudo usermod -a -G www-data USERNAME`
+Fix permission for current User
+`sudo chown -R USER:USER /var/www`
 
 ## Install PHP
 
