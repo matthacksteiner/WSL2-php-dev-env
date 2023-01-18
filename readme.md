@@ -57,12 +57,19 @@ Create a new virtual host file `sudo nano /etc/apache2/sites-available/website.l
         SSLProtocol All -SSLv2 -SSLv3
     </VirtualHost>
 
-Create Directory and a sample content `sudo mkdir /var/www/website/ && echo "<?php phpinfo();?>" | sudo tee /var/www/website/index.php`
+Create Directory and a sample content `sudo mkdir /var/www/website/ && sudo mkdir /var/www/website/public && echo "<?php phpinfo();?>" | sudo tee /var/www/website/public/index.php`
 
 ### Enable the site
 
-    sudo a2ensite website.local.conf
-    sudo service apache2 reload
+`sudo a2ensite website.local.conf && sudo service apache2 reload`
+
+### Edit Windows .hosts file
+
+    # WSL
+    ::1	    website.local
+    127.0.0.1   website.local
+
+You can find your website here: https://website.local/
 
 ## Install Composer
 
