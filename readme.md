@@ -2,6 +2,14 @@
 
 Install WSL2 on Windows 11 in powershell `wsl --install -d ubuntu` und run `sudo apt update && sudo apt upgrade -y` to update the system.
 
+## Install fish shell
+
+`sudo apt-add-repository ppa:fish-shell/release-3 && sudo apt update && sudo apt install fish -y`
+
+show full path in terminal `set -U fish_prompt_pwd_dir_length 0`
+
+set fish as default shell `chsh -s $(which fish)`
+
 ## Install Apache2
 
 Install Apache 2 `sudo apt-get install apt-transport-https ca-certificates apache2 -y`
@@ -74,14 +82,6 @@ You can find your website here: https://website.local/
 ## Install Composer
 
 `sudo apt install composer`
-
-## Install fish shell
-
-`sudo apt-add-repository ppa:fish-shell/release-3 && sudo apt update && sudo apt install fish -y`
-
-show full path in terminal `set -U fish_prompt_pwd_dir_length 0`
-
-set fish as default shell `chsh -s $(which fish)`
 
 ### NVM for fish shell
 
