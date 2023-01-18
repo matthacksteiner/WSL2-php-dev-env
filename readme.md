@@ -14,8 +14,13 @@ Add user to www-data group `sudo usermod -a -G www-data USERNAME`
 
 ## Install PHP
 
-Add PHP8 Repo `sudo add-apt-repository ppa:ondrej/php -y`
-Install PHP `sudo apt install php8.1-fpm php8.1-intl php8.1-xml php8.1-zip php8.1-mbstring php8.1-curl php8.1-ctype php8.1-gd memcached -y`
+### Add PHP8 Repo
+
+`sudo add-apt-repository ppa:ondrej/php -y`
+
+### Install PHP
+
+`sudo apt install php8.1-fpm php8.1-intl php8.1-xml php8.1-zip php8.1-mbstring php8.1-curl php8.1-ctype php8.1-gd memcached -y`
 
 ### Install and setup php-fpm
 
