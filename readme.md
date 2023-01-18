@@ -84,6 +84,9 @@ You can find your website here: https://website.local/
 Install required package
 `sudo apt install php-cli unzip`
 
+Download Composer with curl
+`cd ~ && curl -sS https://getcomposer.org/installer -o /tmp/composer-setup.php`
+
 Install Composer
 `sudo php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer`
 
