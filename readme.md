@@ -1,6 +1,6 @@
 # WSL2 with PHP, Composer & NodesJS ENV for Kirby CMS with headless CMS
 
-Install WSL2 on Windows 11 `wsl --install -d ubuntu` und run `sudo apt update && sudo apt upgrade -y` to update the system.
+Install WSL2 on Windows 11 in powershell `wsl --install -d ubuntu` und run `sudo apt update && sudo apt upgrade -y` to update the system.
 
 ## Install Apache2
 
