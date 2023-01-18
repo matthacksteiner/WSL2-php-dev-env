@@ -15,15 +15,15 @@ Add user to www-data group `sudo usermod -a -G www-data USERNAME`
 ## Install PHP
 
 Add PHP8 Repo `sudo add-apt-repository ppa:ondrej/php -y`
-Install PHP `sudo apt install php8.2-fpm php8.2-intl php8.2-xml php8.2-zip php8.2-mbstring php8.2-curl php8.2-ctype php8.2-gd memcached -y`
+Install PHP `sudo apt install php8.1-fpm php8.1-intl php8.1-xml php8.1-zip php8.1-mbstring php8.1-curl php8.1-ctype php8.1-gd memcached -y`
 
 ### Install and setup php-fpm
 
-`sudo apt install libapache2-mod-fcgid && sudo a2enmod proxy_fcgi setenvif && sudo a2enconf php8.2-fpm`
+`sudo apt install libapache2-mod-fcgid && sudo a2enmod proxy_fcgi setenvif && sudo a2enconf php8.1-fpm`
 
 ### restart services
 
-`sudo service apache2 restart && sudo service php8.2-fpm start && sudo service php8.2-fpm status`
+`sudo service apache2 restart && sudo service php8.1-fpm start && sudo service php8.1-fpm status`
 
 If you go to `http://localhost` you should see the default apache2 page.
 
