@@ -81,7 +81,11 @@ You can find your website here: https://website.local/
 
 ## Install Composer
 
-`sudo apt install composer`
+Install required package
+`sudo apt install php-cli unzip`
+
+Install Composer
+`sudo php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer`
 
 ### NVM for fish shell
 
