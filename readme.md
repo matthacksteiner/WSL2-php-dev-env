@@ -1,5 +1,13 @@
 # WSL2 with PHP, Composer & NodesJS ENV for Kirby CMS with headless CMS
 
+##### Original sources:
+
+https://www.karlomikus.com/blog/php-development-environment-with-wsl-2-and-debian
+
+https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-apache-in-ubuntu-22-04
+
+## Install Ubuntu from Powershell
+
 Install WSL2 on Windows 11 in powershell `wsl --install -d ubuntu` und run `sudo apt update && sudo apt upgrade -y` to update the system.
 
 ## Install fish shell
@@ -11,10 +19,6 @@ show full path in terminal `set -U fish_prompt_pwd_dir_length 0`
 set fish as default shell `chsh -s $(which fish)`
 
 ## Install Apache2
-
-Original sources:
-https://www.karlomikus.com/blog/php-development-environment-with-wsl-2-and-debian
-https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-apache-in-ubuntu-22-04
 
 Install Apache 2 `sudo apt-get install apt-transport-https ca-certificates apache2 -y`
 
