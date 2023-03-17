@@ -12,6 +12,10 @@ set fish as default shell `chsh -s $(which fish)`
 
 ## Install Apache2
 
+Original sources:
+https://www.karlomikus.com/blog/php-development-environment-with-wsl-2-and-debian
+https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-apache-in-ubuntu-22-04
+
 Install Apache 2 `sudo apt-get install apt-transport-https ca-certificates apache2 -y`
 
 ### Enable mods
@@ -44,7 +48,7 @@ If you go to `http://localhost` you should see the default apache2 page.
 ## Apache 2 virtual hosts configuration
 
 Create a self signed certificate
-`sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/wsl.local.key -out /etc/ssl/certs/wsl.local.crt`
+`sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/apache-selfsigned.key -out /etc/ssl/certs/apache-selfsigned.crt`
 
 Create a new virtual host file `sudo nano /etc/apache2/sites-available/website.local.conf`
 
@@ -60,10 +64,16 @@ Create a new virtual host file `sudo nano /etc/apache2/sites-available/website.l
         ErrorLog /var/log/apache2/website-error.log
         CustomLog /var/log/apache2/website-access.log combined
 
-        SSLEngine On
-        SSLCertificateFile      /etc/ssl/certs/wsl.local.crt
-        SSLCertificateKeyFile   /etc/ssl/private/wsl.local.key
-        SSLProtocol All -SSLv2 -SSLv3
+        # SSL Stuff
+        SSLEngine on
+        SSLCertificateFile /etc/ssl/certs/apache-selfsigned.crt
+        SSLCertificateKeyFile /etc/ssl/private/apache-selfsigned.key
+    </VirtualHost>
+
+        # Redirect HTTP to HTTPS
+    <VirtualHost *:80>
+        ServerName website.local
+        Redirect / https://website.local/
     </VirtualHost>
 
 Create Directory and a sample content `sudo mkdir /var/www/website/ && sudo mkdir /var/www/website/public && echo "<?php phpinfo();?>" | sudo tee /var/www/website/public/index.php`
@@ -71,6 +81,14 @@ Create Directory and a sample content `sudo mkdir /var/www/website/ && sudo mkdi
 ### Enable the site
 
 `sudo a2ensite website.local.conf && sudo service apache2 reload`
+
+### Fix all permission on /var/www/
+
+`sudo chmod -R 777 /var/www/`
+
+### Check Apache config
+
+`sudo apache2ctl -S`
 
 ### Edit Windows .hosts file
 
@@ -82,9 +100,6 @@ You can find your website here: https://website.local/
 
 ## Install Composer
 
-Install required package
-`sudo apt install php-cli unzip`
-
 Download Composer with curl
 `cd ~ && curl -sS https://getcomposer.org/installer -o /tmp/composer-setup.php`
 
@@ -93,13 +108,13 @@ Install Composer
 
 ### NVM for fish shell
 
-Install Fisher Plugin Manager 
+Install Fisher Plugin Manager
 `curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fish`
 
 Install NVM
 `fisher install jorgebucaran/nvm.fish`
 
-Install latest LTS Version 
+Install latest LTS Version
 `nvm install lts`
 
 load LTS in fish startup `echo "nvm use lts" >> ~/.config/fish/config.fish`
