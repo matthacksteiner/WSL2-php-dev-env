@@ -128,3 +128,55 @@ see options at: https://github.com/jorgebucaran/nvm.fish
 ## Git config globally
 
 `git config --global user.name "FIRST_NAME LAST_NAME" && git config --global user.email "MY_NAME@example.com"`
+
+## bash file for Apache
+
+    #!/bin/bash
+
+    # Check if the script is being run in sudo mode
+    if [ "$EUID" -ne 0 ]; then
+        echo "This script must be run with sudo privileges."
+        sudo "$0" "$@"
+        exit
+    fi
+
+    # Prompt the user for server name
+    read -p "Enter server name (e.g. example.com): " server_name
+
+    # Set document root to /var/www
+    doc_root="/var/www/${server_name}"
+
+    # Generate Apache 2 config
+    config_file="/etc/apache2/sites-available/${server_name}.conf"
+    echo "<VirtualHost *:443>" >$config_file
+    echo "    ServerName $server_name" >>$config_file
+    echo "    DocumentRoot $doc_root/public/" >>$config_file
+    echo "    <Directory $doc_root/public>" >>$config_file
+    echo "        Options Indexes FollowSymLinks" >>$config_file
+    echo "        AllowOverride All" >>$config_file
+    echo "        Require all granted" >>$config_file
+    echo "    </Directory>" >>$config_file
+    echo "    ErrorLog /var/log/apache2/error.log" >>$config_file
+    echo "    CustomLog /var/log/apache2/access.log combined" >>$config_file
+    echo "    SSLEngine on" >>$config_file
+    echo "    SSLCertificateFile /etc/ssl/certs/apache-selfsigned.crt" >>$config_file
+    echo "    SSLCertificateKeyFile /etc/ssl/private/apache-selfsigned.key" >>$config_file
+    echo "</VirtualHost>" >>$config_file
+    echo "<VirtualHost *:80>" >>$config_file
+    echo "    ServerName $server_name" >>$config_file
+    echo "    Redirect / https://$server_name/" >>$config_file
+    echo "</VirtualHost>" >>$config_file
+
+    # Create index.html file
+    #sudo mkdir $doc_root
+    #sudo mkdir $doc_root/public
+    #echo "<h1>It works!</h1>" | sudo tee $doc_root/public/index.html
+
+    sudo chmod -R 777 /var/www/
+
+    # Enable the new site and restart Apache 2 service
+    sudo a2ensite $server_name
+    sudo service apache2 reload
+
+    echo "Apache 2 configuration for $server_name has been created."
+
