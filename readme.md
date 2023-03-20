@@ -1,4 +1,4 @@
-# WSL2 with PHP, Composer & NodesJS ENV for Kirby CMS with headless CMS
+# WSL2 with PHP, Composer & NodesJS ENV
 
 ##### Original sources:
 
