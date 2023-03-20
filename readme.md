@@ -168,9 +168,9 @@ see options at: https://github.com/jorgebucaran/nvm.fish
     echo "</VirtualHost>" >>$config_file
 
     # Create index.html file
-    #sudo mkdir $doc_root
-    #sudo mkdir $doc_root/public
-    #echo "<h1>It works!</h1>" | sudo tee $doc_root/public/index.html
+    sudo mkdir $doc_root
+    sudo mkdir $doc_root/public
+    echo "<h1>It works!</h1>" | sudo tee $doc_root/public/index.html
 
     sudo chmod -R 777 /var/www/
 
