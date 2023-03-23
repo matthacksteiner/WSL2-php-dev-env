@@ -118,6 +118,10 @@ see options at: https://github.com/jorgebucaran/nvm.fish
 
 `ssh-keygen -t rsa`
 
+## Install Fira Code font
+
+`sudo apt install fonts-firacode`
+
 ## bash file for Apache
 
     #!/bin/bash
