@@ -51,33 +51,18 @@ If you go to `http://localhost` you should see the default apache2 page.
 
 ## Apache 2 virtual hosts configuration
 
-Create a self signed certificate
-`sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/apache-selfsigned.key -out /etc/ssl/certs/apache-selfsigned.crt`
-
 Create a new virtual host file `sudo nano /etc/apache2/sites-available/website.local.conf`
 
-    <VirtualHost *:443>
-        ServerName website.local
-
-        DocumentRoot /var/www/website/public/
-        <Directory /var/www/website/public>
-            AllowOverride all
-            Require all granted
-        </Directory>
-
-        ErrorLog /var/log/apache2/website-error.log
-        CustomLog /var/log/apache2/website-access.log combined
-
-        # SSL Stuff
-        SSLEngine on
-        SSLCertificateFile /etc/ssl/certs/apache-selfsigned.crt
-        SSLCertificateKeyFile /etc/ssl/private/apache-selfsigned.key
-    </VirtualHost>
-
-        # Redirect HTTP to HTTPS
     <VirtualHost *:80>
         ServerName website.local
-        Redirect / https://website.local/
+        DocumentRoot /var/www/website.local/public/
+        <Directory /var/www/website.local/public>
+            Options Indexes FollowSymLinks
+            AllowOverride All
+            Require all granted
+        </Directory>
+        ErrorLog /var/log/apache2/error.log
+        CustomLog /var/log/apache2/access.log combined
     </VirtualHost>
 
 Create Directory and a sample content `sudo mkdir /var/www/website/ && sudo mkdir /var/www/website/public && echo "<?php phpinfo();?>" | sudo tee /var/www/website/public/index.php`
@@ -129,6 +114,10 @@ see options at: https://github.com/jorgebucaran/nvm.fish
 
 `git config --global user.name "FIRST_NAME LAST_NAME" && git config --global user.email "MY_NAME@example.com"`
 
+## Create a SSH key
+
+`ssh-keygen -t rsa`
+
 ## bash file for Apache
 
     #!/bin/bash
@@ -148,7 +137,7 @@ see options at: https://github.com/jorgebucaran/nvm.fish
 
     # Generate Apache 2 config
     config_file="/etc/apache2/sites-available/${server_name}.conf"
-    echo "<VirtualHost *:443>" >$config_file
+    echo "<VirtualHost *:80>" >$config_file
     echo "    ServerName $server_name" >>$config_file
     echo "    DocumentRoot $doc_root/public/" >>$config_file
     echo "    <Directory $doc_root/public>" >>$config_file
@@ -158,13 +147,6 @@ see options at: https://github.com/jorgebucaran/nvm.fish
     echo "    </Directory>" >>$config_file
     echo "    ErrorLog /var/log/apache2/error.log" >>$config_file
     echo "    CustomLog /var/log/apache2/access.log combined" >>$config_file
-    echo "    SSLEngine on" >>$config_file
-    echo "    SSLCertificateFile /etc/ssl/certs/apache-selfsigned.crt" >>$config_file
-    echo "    SSLCertificateKeyFile /etc/ssl/private/apache-selfsigned.key" >>$config_file
-    echo "</VirtualHost>" >>$config_file
-    echo "<VirtualHost *:80>" >>$config_file
-    echo "    ServerName $server_name" >>$config_file
-    echo "    Redirect / https://$server_name/" >>$config_file
     echo "</VirtualHost>" >>$config_file
 
     # Create index.html file
@@ -179,4 +161,3 @@ see options at: https://github.com/jorgebucaran/nvm.fish
     sudo service apache2 reload
 
     echo "Apache 2 configuration for $server_name has been created."
-
