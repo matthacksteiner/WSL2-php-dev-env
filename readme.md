@@ -159,7 +159,8 @@ see options at: https://github.com/jorgebucaran/nvm.fish
     echo "<h1>It works!</h1>" | sudo tee $doc_root/public/index.html
     
     # fix permissions
-    sudo chown -R :www-data /var/www
+    sudo chown -R www-data:www-data *
+
     
     # Linux only: Add the server name to the beginning of /etc/hosts
     sudo sed -i "1i127.0.0.1 ${server_name}" /etc/hosts
