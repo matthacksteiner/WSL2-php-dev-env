@@ -73,7 +73,7 @@ Create Directory and a sample content `sudo mkdir /var/www/website/ && sudo mkdi
 
 ### Fix all permission on /var/www/
 
-`sudo chmod -R 777 /var/www/`
+`sudo chown -R www-data:www-data /var/www`
 
 ### Check Apache config
 
@@ -159,7 +159,7 @@ see options at: https://github.com/jorgebucaran/nvm.fish
     echo "<h1>It works!</h1>" | sudo tee $doc_root/public/index.html
     
     # fix permissions
-    sudo chown -R www-data:www-data *
+    sudo chown -R www-data:www-data /var/www *
 
     
     # Linux only: Add the server name to the beginning of /etc/hosts
