@@ -73,7 +73,7 @@ Create Directory and a sample content `sudo mkdir /var/www/website/ && sudo mkdi
 
 ### Fix all permission on /var/www/
 
-`sudo chown -R www-data:www-data /var/www`
+`sudo chmod -R 777 /var/www/`
 
 ### Check Apache config
 
@@ -113,6 +113,9 @@ see options at: https://github.com/jorgebucaran/nvm.fish
 ## Git config globally
 
 `git config --global user.name "FIRST_NAME LAST_NAME" && git config --global user.email "MY_NAME@example.com"`
+
+## Git ignore file permissions globally
+`git config --global core.fileMode false`
 
 ## Create a SSH key
 
@@ -159,7 +162,7 @@ see options at: https://github.com/jorgebucaran/nvm.fish
     echo "<h1>It works!</h1>" | sudo tee $doc_root/public/index.html
     
     # fix permissions
-    sudo chown -R www-data:www-data /var/www *
+    sudo chmod -R 777 /var/www/ *
 
     
     # Linux only: Add the server name to the beginning of /etc/hosts
