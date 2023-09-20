@@ -26,9 +26,6 @@ Install Apache 2 `sudo apt-get install apt-transport-https ca-certificates apach
 
 `sudo a2enmod headers && sudo a2enmod rewrite && sudo a2enmod ssl && sudo a2enmod remoteip`
 
-Fix permission for current User
-`sudo chown -R USER:USER /var/www`
-
 ## Install PHP
 
 ### Add PHP8 Repo
@@ -71,9 +68,19 @@ Create Directory and a sample content `sudo mkdir /var/www/website/ && sudo mkdi
 
 `sudo a2ensite website.local.conf && sudo service apache2 reload`
 
-### Fix all permission on /var/www/
+## Give user permission to edit and add files in /var/www
 
-`sudo chmod -R 777 /var/www/`
+Add the www-data group to an existing user
+`sudo usermod -a -G www-data username`
+
+Make sure all files are owned by the www-data group and user (cleans up the ownership)
+`sudo chown -R www-data:www-data /var/www`
+
+Enable all members of the www-data group to read and write files
+`sudo chmod -R g+rw /var/www`
+
+Ensure that all files created keep the current user and permissions
+`sudo chmod -R g+rws /var/www`
 
 ### Check Apache config
 
