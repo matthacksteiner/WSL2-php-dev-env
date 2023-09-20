@@ -121,6 +121,9 @@ see options at: https://github.com/jorgebucaran/nvm.fish
 
 `git config --global user.name "FIRST_NAME LAST_NAME" && git config --global user.email "MY_NAME@example.com"`
 
+## Git ignore file permissions globally
+`git config --global core.fileMode false`
+
 ## Create a SSH key
 
 `ssh-keygen -t rsa`
@@ -164,8 +167,13 @@ see options at: https://github.com/jorgebucaran/nvm.fish
     sudo mkdir $doc_root
     sudo mkdir $doc_root/public
     echo "<h1>It works!</h1>" | sudo tee $doc_root/public/index.html
+    
+    # fix permissions
+    sudo chmod -R 777 /var/www/ *
 
-    sudo chmod -R 777 /var/www/
+    
+    # Linux only: Add the server name to the beginning of /etc/hosts
+    sudo sed -i "1i127.0.0.1 ${server_name}" /etc/hosts
 
     # Enable the new site and restart Apache 2 service
     sudo a2ensite $server_name
